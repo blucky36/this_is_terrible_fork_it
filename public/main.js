@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', e => {
       p.innerText = "( ͡° ͜ʖ ͡°)Let's do the gitterbug ( ͡° ͜ʖ ͡°)";
       owo[i].document.body.appendChild(p);
       // TODO: FIX this
-      let xss = owo[i].document.createElement('script');
-      xss.setAttribute('src', `${document.location.protocol}/main.js`);
-      xss.setAttribute('type', 'text/javascript');
-      owo[i].document.body.appendChild(xss);
+      // let xss = owo[i].document.createElement('script');
+      // xss.setAttribute('src', `${document.location.protocol}localhost:3000/main.js`);
+      // xss.setAttribute('type', 'text/javascript');
+      // owo[i].document.body.appendChild(xss);
     }
 
     window.setInterval(() => {
