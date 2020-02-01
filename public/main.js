@@ -14,10 +14,21 @@ document.addEventListener('DOMContentLoaded', e => {
    * Helper function that adds a bunch of terrible shit to the new window.
    * @param {Window} w Window global for new popup window.
    */
-  const addBunch_o_shizTo_newWindow = w => {
-    let p = w.document.createElement('p');
-    w.innerText = "( ͡° ͜ʖ ͡°)Let's do the gitterbug ( ͡° ͜ʖ ͡°)";
-    w.document.body.appendChild(p);
+  const addBunch_o_shizTo_newWindow = (it) => {
+    //Lenny
+    let p = document.createElement('p'), theLegend;
+    p.innerText = "( ͡° ͜ʖ ͡°) Let's do the gitterbug ( ͡° ͜ʖ ͡°)";
+    document.getElementById('rickHere').appendChild(p);
+    //RickRoll
+    for (let i = 0; i < it; i++) {
+      theLegend = document.createElement('iframe');
+      theLegend.setAttribute('width', '50');
+      theLegend.setAttribute('height', '50');
+      theLegend.setAttribute('src', 'https://www.youtube.com/embed/oHg5SJYRHA0?controls=0&amp;start=1;autoplay=1');
+      theLegend.setAttribute('frameborder', '0');
+      theLegend.setAttribute('allow', 'autoplay');
+      document.getElementById('rickHere').appendChild(theLegend);
+    }
   };
 
   /**
@@ -32,9 +43,10 @@ document.addEventListener('DOMContentLoaded', e => {
 
     for (let i = 0; i < it; i++) {
       // Windows need to be named differently to exist as multiples.
-      owo.push(window.open(`localhost:3000`, `${winName}${i}`, 'width=100,height=100'));
-      addBunch_o_shizTo_newWindow(owo[i])
+      owo.push(window.open(`http://localhost:3000`, `${winName}${i}`, 'width=100,height=100'));
     }
+
+    addBunch_o_shizTo_newWindow(it);
 
     /**
      * Utter speech in every voice every 20 seconds.
@@ -56,16 +68,21 @@ document.addEventListener('DOMContentLoaded', e => {
   }
 
   /**
-   * Dispatcher for runner, will add 1 new window if run on a p tag window.
-   * This is put in a half second timeout to give the p tag check time to be
-   * an option.
+   * Dispatcher for runner,
+   * It will load tiny copies of itself that start loading tiny copies of
+   * themselves.
    */
-  window.setTimeout(() => {
-    if (document.getElementsByTagName('p').length > 0) {
-      runner(`${getRand()}`, 1);
-    } else {
-      document.getElementById('begin').addEventListener('click', ev => { runner(10) });
-    }
-  }, 500)
+  const dispatch = () => {
+    runner(`${getRand()}`, 1);
+    document.getElementById('begin').addEventListener('click', ev => {
+        runner(`${getRand()}`, 1)
+      });
+    document.addEventListener('keydown', eve => {
+      runner(`${getRand()}`, 1)
+    })
+  }
+  /**
+   * Go.
+   */
+  dispatch();
 })
-
